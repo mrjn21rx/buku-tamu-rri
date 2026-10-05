@@ -102,9 +102,10 @@ class AdminController extends Controller
     public function exportPdf(Request $request)
     {
         $visitors = $this->getFilteredQuery($request)->get();
+        $waktuCetak = now()->setTimezone('Asia/Jakarta')->locale('id')->isoFormat('dddd, D MMMM YYYY [pukul] HH:mm [WIB]');
         
         // Memanggil view cetak PDF
-        $pdf = Pdf::loadView('admin.pdf', compact('visitors'));
+        $pdf = Pdf::loadView('admin.pdf', compact('visitors', 'waktuCetak'));
         
         // Set ukuran kertas
         $pdf->setPaper('A4', 'landscape');

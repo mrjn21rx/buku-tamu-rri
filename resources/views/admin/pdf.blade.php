@@ -17,19 +17,18 @@
     <div class="header">
         <h2>Laporan Rekapitulasi Kunjungan Tamu</h2>
         <p>Lembaga Penyiaran Publik RRI Bukittinggi</p>
-        <p>Dicetak pada: {{ now()->format('d M Y H:i') }}</p>
+        <p>Dokumen dicetak pada: {{ $waktuCetak ?? now()->locale('id')->isoFormat('dddd, D MMMM YYYY [pukul] HH:mm [WIB]') }}</p>
     </div>
 
     <table>
         <thead>
             <tr>
-                <th width="3%">No</th>
-                <th width="10%">Tanggal</th>
-                <th width="12%">Kode</th>
-                <th width="15%">Nama Pengunjung</th>
-                <th width="20%">Instansi/Alamat</th>
-                <th width="10%">Divisi Tujuan</th>
-                <th width="20%">Keperluan</th>
+                <th width="4%">No</th>
+                <th width="11%">Tanggal</th>
+                <th width="18%">Nama Pengunjung</th>
+                <th width="22%">Instansi/Alamat</th>
+                <th width="12%">Divisi Tujuan</th>
+                <th width="23%">Keperluan</th>
                 <th width="10%">Status</th>
             </tr>
         </thead>
@@ -38,7 +37,6 @@
             <tr>
                 <td class="text-center">{{ $index + 1 }}</td>
                 <td class="text-center">{{ \Carbon\Carbon::parse($v->tanggal_kunjungan)->format('d/m/Y') }}</td>
-                <td class="text-center">{{ $v->kode_registrasi }}</td>
                 <td>{{ $v->nama_lengkap }}<br><small>{{ $v->no_hp }}</small></td>
                 <td>{{ $v->alamat }}</td>
                 <td class="text-center">{{ $v->divisi_tujuan }}</td>
