@@ -2,7 +2,7 @@
 
 @section('content')
 <!-- Hero Section Modern -->
-<div class="relative bg-blue-900 min-h-[75vh] flex items-center justify-center overflow-hidden">
+<div class="relative bg-blue-900 min-h-[78vh] flex flex-col justify-between overflow-hidden">
     <!-- 1. Foto Gedung Asli (Di lapisan paling bawah) -->
     <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ asset('images/gedung-rri.png') }}');"></div>
     
@@ -12,7 +12,19 @@
     <!-- 3. Efek Vignette (Pinggiran agak gelap agar fokus ke tengah) -->
     <div class="absolute inset-0 bg-black/30"></div>
     
-    <div class="relative z-10 text-center px-4 max-w-4xl mx-auto mt-10">
+    <!-- Jam Realtime: Di pojok kanan atas, menyatu dengan background Gedung RRI -->
+    <div class="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-5 sm:pt-6 flex justify-end">
+        <div class="inline-flex items-center gap-2.5 bg-slate-950/40 hover:bg-slate-900/60 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 text-white shadow-xl shadow-black/30 transition-all duration-300">
+            <span class="relative flex h-2 w-2">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+            <i class="far fa-clock text-cyan-300 text-sm"></i>
+            <span id="hero-realtime-clock" class="realtime-clock-display text-xs sm:text-sm font-semibold tracking-wide font-mono text-white/95"></span>
+        </div>
+    </div>
+
+    <div class="relative z-10 text-center px-4 max-w-4xl mx-auto my-auto py-8">
         <span class="inline-block py-1 px-3 rounded-full bg-blue-800/50 border border-blue-400/30 text-blue-200 text-xs font-semibold tracking-widest uppercase mb-6 backdrop-blur-sm">Layanan Digital</span>
         <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight">
             Buku Tamu <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-cyan-200">RRI Bukittinggi</span>
@@ -25,6 +37,9 @@
             <i class="fas fa-arrow-right ml-3 group-hover:translate-x-1 transition-transform"></i>
         </a>
     </div>
+
+    <!-- Spacer bawah agar tombol CTA tidak bertabrakan dengan feature cards (-mt-20) -->
+    <div class="h-20 sm:h-24"></div>
 </div>
 
 <!-- Feature Cards Section -->

@@ -20,23 +20,18 @@
 </head>
 <body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen selection:bg-blue-200">
 
-    <!-- Navbar Minimalis Modern -->
+<!-- Navbar Minimalis Modern -->
     <nav class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-slate-200 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
+                <!-- BAGIAN KIRI: Logo -->
                 <div class="flex items-center gap-3">
                     <a href="{{ route('home') }}" class="flex items-center gap-3 group">
-                        <!-- Ini untuk memanggil logo PNG Anda -->
                         <img src="{{ asset('images/logo_rri.svg') }}" alt="Logo RRI Bukittinggi" class="h-10 md:h-12 w-auto object-contain group-hover:scale-105 transition-transform duration-300">
                     </a>
                 </div>
 
-                {{-- Jam Digital Realtime Navbar --}}
-                <div class="flex items-center gap-2 bg-slate-100/90 px-3.5 py-1.5 rounded-full border border-slate-200 text-slate-700 shadow-inner">
-                    <i class="far fa-clock text-blue-600 text-xs md:text-sm animate-pulse"></i>
-                    <span id="navbar-realtime-clock" class="text-xs md:text-sm font-semibold tracking-wide font-mono text-slate-800"></span>
-                </div>
-
+                <!-- BAGIAN KANAN: Menu Navigasi Saja -->
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="{{ route('home') }}" class="text-sm font-semibold text-slate-600 hover:text-blue-700 transition-colors">Beranda</a>
                     <a href="{{ route('registrasi') }}" class="text-sm font-semibold text-slate-600 hover:text-blue-700 transition-colors">Buku Tamu</a>
@@ -53,7 +48,7 @@
             </div>
         </div>
     </nav>
-
+    
     <!-- Konten Utama -->
     <main class="flex-grow">
         @yield('content')
@@ -65,9 +60,9 @@
     </footer>
 
     <script>
-        function updateNavbarClock() {
-            const clockEl = document.getElementById('navbar-realtime-clock');
-            if (!clockEl) return;
+        function updateRealtimeClock() {
+            const clockEls = document.querySelectorAll('.realtime-clock-display, #navbar-realtime-clock, #hero-realtime-clock');
+            if (!clockEls.length) return;
 
             const now = new Date();
             const hari = now.toLocaleDateString('id-ID', { weekday: 'long' });
@@ -76,11 +71,14 @@
             const menit = String(now.getMinutes()).padStart(2, '0');
             const detik = String(now.getSeconds()).padStart(2, '0');
 
-            clockEl.textContent = `${hari}, ${tanggal} • ${jam}:${menit}:${detik} WIB`;
+            const formattedTime = `${hari}, ${tanggal} • ${jam}:${menit}:${detik} WIB`;
+            clockEls.forEach(el => {
+                el.textContent = formattedTime;
+            });
         }
         document.addEventListener('DOMContentLoaded', function() {
-            updateNavbarClock();
-            setInterval(updateNavbarClock, 1000);
+            updateRealtimeClock();
+            setInterval(updateRealtimeClock, 1000);
         });
     </script>
 </body>
